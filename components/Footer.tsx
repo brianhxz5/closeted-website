@@ -20,7 +20,9 @@ export default function Footer() {
 
       <nav className="flex items-center gap-6">
         {[
-          { label: "instagram", href: "https://instagram.com/closeted.app" },
+          { label: "instagram", href: "https://www.instagram.com/trycloseted?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" },
+          { label: "tiktok", href: "https://www.tiktok.com/@closeted.app?_r=1&_t=ZS-96QgIicVFIG" },
+          { label: "linkedin", href: "https://www.linkedin.com/company/closetedapp/" },
           { label: "privacy", href: "/privacy" },
         ].map((link) => (
           <a
