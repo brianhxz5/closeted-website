@@ -23,7 +23,7 @@ const newsreader = Newsreader({
 export const metadata: Metadata = {
   title: "closeted — find your style",
   description:
-    "you know what you like. you just can't say it yet. closeted finds your taste in everything that keeps pulling you back.",
+    "you know what you like. you just don't know it yet. closeted finds your taste in everything that keeps pulling you back.",
   openGraph: {
     title: "closeted",
     description: "style discovery, without the gatekeeping.",

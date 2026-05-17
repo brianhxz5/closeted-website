@@ -68,7 +68,7 @@ export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
           >
             you know what you like.
             <br />
-            you just can&apos;t say it yet.
+            you just don&apos;t know it yet.
           </h1>
           <p
             className="text-base md:text-lg leading-relaxed mb-10 max-w-md"
