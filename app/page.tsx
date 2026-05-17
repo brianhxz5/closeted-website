@@ -8,6 +8,7 @@ import Philosophy from "@/components/Philosophy";
 import PassportCallout from "@/components/PassportCallout";
 import Footer from "@/components/Footer";
 import AccessModal from "@/components/AccessModal";
+import AppScreenshots from "@/components/AppScreenshots";
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -20,6 +21,7 @@ export default function Home() {
       <main>
         <Hero onOpenModal={open} />
         <RhymesWith />
+        <AppScreenshots />
         <Philosophy />
         <PassportCallout onOpenModal={open} />
       </main>
