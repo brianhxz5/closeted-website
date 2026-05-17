@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 const tones = [
   "#C8C0B0","#BEB6A8","#D0C8B8","#C4BAA8","#B8B098",
   "#CCB89A","#C0BAA4","#D4CAB8","#B4ACA0","#CAC0AC",
@@ -37,6 +41,9 @@ function WardrobeMosaic() {
               gridRow: `${row} / span ${rowSpan}`,
               background: tones[i % tones.length],
               borderRadius: "2px",
+              animation: "fadeIn 1s ease forwards",
+              animationDelay: `${i * 0.05}s`,
+              opacity: 0,
             }}
           />
         ))}
@@ -46,6 +53,20 @@ function WardrobeMosaic() {
 }
 
 export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const t = setTimeout(() => setMounted(true), 60);
+    return () => clearTimeout(t);
+  }, []);
+
+  const fadeUp = (delay: number): React.CSSProperties => ({
+    opacity: mounted ? 1 : 0,
+    transform: mounted ? "translateY(0)" : "translateY(20px)",
+    transition: "opacity 0.7s ease, transform 0.7s ease",
+    transitionDelay: `${delay}s`,
+  });
+
   return (
     <section
       className="relative overflow-hidden flex items-center"
@@ -58,13 +79,13 @@ export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
         <div className="flex-1 max-w-xl w-full">
           <p
             className="text-xs uppercase tracking-widest mb-8"
-            style={{ fontFamily: "var(--font-space-mono)", color: "var(--text-muted)", letterSpacing: "0.18em" }}
+            style={{ fontFamily: "var(--font-space-mono)", color: "var(--text-muted)", letterSpacing: "0.18em", ...fadeUp(0) }}
           >
             EARLY ACCESS
           </p>
           <h1
             className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight mb-6"
-            style={{ color: "var(--text)", letterSpacing: "-0.02em", fontFamily: "var(--font-inter)" }}
+            style={{ color: "var(--text)", letterSpacing: "-0.02em", fontFamily: "var(--font-inter)", ...fadeUp(0.1) }}
           >
             you know what you like.
             <br />
@@ -72,13 +93,13 @@ export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
           </h1>
           <p
             className="text-base md:text-lg leading-relaxed mb-10 max-w-md"
-            style={{ color: "var(--text-muted)", fontFamily: "var(--font-inter)", letterSpacing: "-0.01em" }}
+            style={{ color: "var(--text-muted)", fontFamily: "var(--font-inter)", letterSpacing: "-0.01em", ...fadeUp(0.2) }}
           >
             closeted finds your taste in the films you rewatch, the textures you
             keep noticing, the fits you screenshot and forget. it connects the
             dots and makes your style legible. without the gatekeeping.
           </p>
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4" style={fadeUp(0.3)}>
             <button
               onClick={onOpenModal}
               className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium transition-opacity hover:opacity-80"
@@ -103,8 +124,11 @@ export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
           </div>
         </div>
 
-        {/* phone video — stacked below on mobile, right column on desktop */}
-        <div className="flex flex-1 justify-center lg:justify-end items-center w-full lg:w-auto">
+        {/* phone video */}
+        <div
+          className="flex flex-1 justify-center lg:justify-end items-center w-full lg:w-auto"
+          style={fadeUp(0.4)}
+        >
           <div className="overflow-hidden shadow-2xl" style={{ borderRadius: "44px", width: 220 }}>
             <video autoPlay muted loop playsInline style={{ width: "100%", display: "block" }}>
               <source src="/onboarding-cropped.mp4" type="video/mp4" />

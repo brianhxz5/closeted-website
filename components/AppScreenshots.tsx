@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useInView } from "@/hooks/useInView";
 
 const screens = [
   {
@@ -55,6 +58,8 @@ function PhoneFrame({ screen, size = 175 }: { screen: typeof screens[0]; size?: 
 }
 
 export default function AppScreenshots() {
+  const { ref, inView } = useInView<HTMLDivElement>();
+
   return (
     <section className="py-20 px-6 md:px-16 lg:px-24" style={{ background: "var(--bg)" }}>
       {/* mobile carousel */}
@@ -70,15 +75,23 @@ export default function AppScreenshots() {
       </div>
 
       {/* desktop staggered */}
-      <div className="hidden md:flex items-end gap-8 justify-center">
-        {screens.map((screen, i) => (
-          <div
-            key={screen.src}
-            style={{ transform: `translateY(${i === 0 ? "0px" : i === 1 ? "40px" : "20px"})` }}
-          >
-            <PhoneFrame screen={screen} size={i === 1 ? 200 : 175} />
-          </div>
-        ))}
+      <div ref={ref} className="hidden md:flex items-end gap-8 justify-center">
+        {screens.map((screen, i) => {
+          const baseY = i === 0 ? 0 : i === 1 ? 40 : 20;
+          return (
+            <div
+              key={screen.src}
+              style={{
+                transform: `translateY(${baseY + (inView ? 0 : 24)}px)`,
+                opacity: inView ? 1 : 0,
+                transition: "opacity 0.7s ease, transform 0.7s ease",
+                transitionDelay: `${i * 0.12}s`,
+              }}
+            >
+              <PhoneFrame screen={screen} size={i === 1 ? 200 : 175} />
+            </div>
+          );
+        })}
       </div>
     </section>
   );

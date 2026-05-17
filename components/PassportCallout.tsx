@@ -1,8 +1,21 @@
+"use client";
+
 import Image from "next/image";
+import { useInView } from "@/hooks/useInView";
 
 export default function PassportCallout({ onOpenModal }: { onOpenModal: () => void }) {
+  const { ref, inView } = useInView<HTMLElement>();
+
+  const fadeUp = (delay: number): React.CSSProperties => ({
+    opacity: inView ? 1 : 0,
+    transform: inView ? "translateY(0)" : "translateY(20px)",
+    transition: "opacity 0.6s ease, transform 0.6s ease",
+    transitionDelay: `${delay}s`,
+  });
+
   return (
     <section
+      ref={ref}
       className="py-24 px-6 md:px-16 lg:px-24 flex flex-col lg:flex-row gap-16 lg:gap-24 items-start lg:items-center"
       style={{ background: "var(--dark-bg)" }}
     >
@@ -14,6 +27,7 @@ export default function PassportCallout({ onOpenModal }: { onOpenModal: () => vo
             fontFamily: "var(--font-space-mono)",
             color: "#8C8C8C",
             letterSpacing: "0.18em",
+            ...fadeUp(0),
           }}
         >
           STYLE PASSPORT
@@ -24,6 +38,7 @@ export default function PassportCallout({ onOpenModal }: { onOpenModal: () => vo
             color: "#fff",
             fontFamily: "var(--font-inter)",
             letterSpacing: "-0.02em",
+            ...fadeUp(0.1),
           }}
         >
           your style, made legible.
@@ -34,6 +49,7 @@ export default function PassportCallout({ onOpenModal }: { onOpenModal: () => vo
             color: "#8C8C8C",
             fontFamily: "var(--font-inter)",
             lineHeight: "1.75",
+            ...fadeUp(0.18),
           }}
         >
           after a while, closeted knows enough to give you a style passport. a
@@ -51,14 +67,18 @@ export default function PassportCallout({ onOpenModal }: { onOpenModal: () => vo
             letterSpacing: "0.04em",
             background: "transparent",
             cursor: "pointer",
+            ...fadeUp(0.26),
           }}
         >
           get yours →
         </button>
       </div>
 
-      {/* right — real screenshot */}
-      <div className="w-full lg:flex-1 flex justify-center">
+      {/* right — screenshot */}
+      <div
+        className="w-full lg:flex-1 flex justify-center"
+        style={fadeUp(0.15)}
+      >
         <div
           className="overflow-hidden shadow-2xl"
           style={{ borderRadius: "36px", width: 260 }}

@@ -46,6 +46,11 @@ body::after {
   background-size: 200px 200px;
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 /* space mono utility */
 .font-mono {
   font-family: var(--font-space-mono), 'Courier New', monospace;

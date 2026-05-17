@@ -1,3 +1,7 @@
+"use client";
+
+import { useInView } from "@/hooks/useInView";
+
 const beats = [
   {
     label: "NOT A FEED",
@@ -45,6 +49,8 @@ function Beat({ beat }: { beat: typeof beats[0] }) {
 }
 
 export default function Philosophy() {
+  const { ref, inView } = useInView<HTMLDivElement>();
+
   return (
     <section
       className="py-24 px-6 md:px-16 lg:px-24"
@@ -67,11 +73,17 @@ export default function Philosophy() {
       </div>
 
       {/* desktop staggered grid */}
-      <div className="hidden md:grid grid-cols-3 gap-12 md:gap-8 md:items-start max-w-5xl">
-        {beats.map((beat) => (
+      <div ref={ref} className="hidden md:grid grid-cols-3 gap-12 md:gap-8 md:items-start max-w-5xl">
+        {beats.map((beat, i) => (
           <div
             key={beat.label}
-            style={{ ["--md-offset" as string]: beat.mdOffset }}
+            style={{
+              ["--md-offset" as string]: beat.mdOffset,
+              opacity: inView ? 1 : 0,
+              transform: inView ? "translateY(0)" : "translateY(24px)",
+              transition: "opacity 0.6s ease, transform 0.6s ease",
+              transitionDelay: `${i * 0.12}s`,
+            }}
             className="md:[margin-top:var(--md-offset)]"
           >
             <Beat beat={beat} />

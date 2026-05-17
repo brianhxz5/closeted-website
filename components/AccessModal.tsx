@@ -15,28 +15,36 @@ export default function AccessModal({ open, onClose }: Props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [state, setState] = useState<State>("idle");
+  const [visible, setVisible] = useState(false);
   const nameRef = useRef<HTMLInputElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
-  /* focus first field when modal opens */
+  /* animate in when opened */
   useEffect(() => {
     if (open) {
-      setTimeout(() => nameRef.current?.focus(), 50);
+      requestAnimationFrame(() => setVisible(true));
+      setTimeout(() => nameRef.current?.focus(), 80);
       setState("idle");
       setName("");
       setEmail("");
     }
   }, [open]);
 
+  /* animate out then close */
+  function handleClose() {
+    setVisible(false);
+    setTimeout(onClose, 200);
+  }
+
   /* close on ESC */
   useEffect(() => {
     if (!open) return;
     const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") handleClose();
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [open, onClose]);
+  }, [open]);
 
   /* prevent body scroll while open */
   useEffect(() => {
@@ -64,12 +72,15 @@ export default function AccessModal({ open, onClose }: Props) {
   if (!open) return null;
 
   return (
-    /* backdrop */
     <div
       ref={overlayRef}
       className="fixed inset-0 z-[100] flex items-center justify-center px-6"
-      style={{ background: "rgba(26,26,26,0.6)", backdropFilter: "blur(4px)" }}
-      onClick={(e) => { if (e.target === overlayRef.current) onClose(); }}
+      style={{
+        background: `rgba(26,26,26,${visible ? 0.6 : 0})`,
+        backdropFilter: visible ? "blur(4px)" : "blur(0px)",
+        transition: "background 0.2s ease, backdrop-filter 0.2s ease",
+      }}
+      onClick={(e) => { if (e.target === overlayRef.current) handleClose(); }}
     >
       {/* panel */}
       <div
@@ -78,11 +89,14 @@ export default function AccessModal({ open, onClose }: Props) {
           background: "var(--bg)",
           border: "1px dashed var(--border)",
           borderRadius: "3px",
+          opacity: visible ? 1 : 0,
+          transform: visible ? "scale(1) translateY(0)" : "scale(0.97) translateY(8px)",
+          transition: "opacity 0.2s ease, transform 0.2s ease",
         }}
       >
         {/* close */}
         <button
-          onClick={onClose}
+          onClick={handleClose}
           className="absolute top-4 right-5 text-sm transition-opacity hover:opacity-50"
           style={{
             fontFamily: "var(--font-space-mono)",
@@ -98,7 +112,7 @@ export default function AccessModal({ open, onClose }: Props) {
         </button>
 
         {state === "success" ? (
-          <SuccessState name={name} onClose={onClose} />
+          <SuccessState name={name} onClose={handleClose} />
         ) : (
           <FormState
             name={name}

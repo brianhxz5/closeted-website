@@ -1,3 +1,7 @@
+"use client";
+
+import { useInView } from "@/hooks/useInView";
+
 const cards = [
   {
     category: "FILM",
@@ -57,30 +61,44 @@ function Card({ card }: { card: typeof cards[0] }) {
 }
 
 export default function RhymesWith() {
+  const { ref: headerRef, inView: headerInView } = useInView<HTMLDivElement>();
+  const { ref: cardsRef, inView: cardsInView } = useInView<HTMLDivElement>();
+
+  const fadeUp = (delay: number): React.CSSProperties => ({
+    opacity: headerInView ? 1 : 0,
+    transform: headerInView ? "translateY(0)" : "translateY(20px)",
+    transition: "opacity 0.6s ease, transform 0.6s ease",
+    transitionDelay: `${delay}s`,
+  });
+
   return (
     <section className="py-24 px-6 md:px-16 lg:px-24" style={{ background: "var(--bg)" }}>
-      <p
-        className="text-xs uppercase tracking-widest mb-12"
-        style={{ fontFamily: "var(--font-space-mono)", color: "var(--text-muted)", letterSpacing: "0.18em" }}
-      >
-        WHAT IT RHYMES WITH
-      </p>
-
-      <div className="max-w-5xl">
-        <h2
-          className="text-2xl md:text-3xl font-semibold mb-4 max-w-lg"
-          style={{ color: "var(--text)", fontFamily: "var(--font-inter)", letterSpacing: "-0.02em" }}
-        >
-          your taste shows up in everything.
-        </h2>
+      <div ref={headerRef}>
         <p
-          className="text-base mb-12 max-w-md"
-          style={{ color: "var(--text-muted)", fontFamily: "var(--font-inter)", letterSpacing: "-0.01em", lineHeight: "1.7" }}
+          className="text-xs uppercase tracking-widest mb-12"
+          style={{ fontFamily: "var(--font-space-mono)", color: "var(--text-muted)", letterSpacing: "0.18em", ...fadeUp(0) }}
         >
-          a film, an album, a city. closeted finds what they have in common
-          with what you keep reaching for.
+          WHAT IT RHYMES WITH
         </p>
 
+        <div className="max-w-5xl">
+          <h2
+            className="text-2xl md:text-3xl font-semibold mb-4 max-w-lg"
+            style={{ color: "var(--text)", fontFamily: "var(--font-inter)", letterSpacing: "-0.02em", ...fadeUp(0.08) }}
+          >
+            your taste shows up in everything.
+          </h2>
+          <p
+            className="text-base mb-12 max-w-md"
+            style={{ color: "var(--text-muted)", fontFamily: "var(--font-inter)", letterSpacing: "-0.01em", lineHeight: "1.7", ...fadeUp(0.16) }}
+          >
+            a film, an album, a city. closeted finds what they have in common
+            with what you keep reaching for.
+          </p>
+        </div>
+      </div>
+
+      <div className="max-w-5xl">
         {/* mobile carousel */}
         <div
           className="md:hidden flex gap-4 -mx-6 px-6 pb-4"
@@ -98,11 +116,17 @@ export default function RhymesWith() {
         </div>
 
         {/* desktop staggered grid */}
-        <div className="hidden md:grid grid-cols-3 gap-4 md:items-start">
-          {cards.map((card) => (
+        <div ref={cardsRef} className="hidden md:grid grid-cols-3 gap-4 md:items-start">
+          {cards.map((card, i) => (
             <div
               key={card.title}
-              style={{ ["--md-offset" as string]: card.mdOffset }}
+              style={{
+                ["--md-offset" as string]: card.mdOffset,
+                opacity: cardsInView ? 1 : 0,
+                transform: cardsInView ? "translateY(0)" : "translateY(24px)",
+                transition: "opacity 0.6s ease, transform 0.6s ease",
+                transitionDelay: `${i * 0.1}s`,
+              }}
               className="md:[margin-top:var(--md-offset)]"
             >
               <Card card={card} />
