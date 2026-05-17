@@ -58,7 +58,7 @@ export default function PassportCallout({ onOpenModal }: { onOpenModal: () => vo
       </div>
 
       {/* right — real screenshot */}
-      <div className="flex-1 flex justify-center lg:justify-end">
+      <div className="w-full lg:flex-1 flex justify-center">
         <div
           className="overflow-hidden shadow-2xl"
           style={{ borderRadius: "36px", width: 260 }}

@@ -19,58 +19,64 @@ const beats = [
   },
 ];
 
+function Beat({ beat }: { beat: typeof beats[0] }) {
+  return (
+    <div className="flex flex-col gap-3">
+      <span
+        className="text-xs uppercase tracking-widest"
+        style={{ fontFamily: "var(--font-space-mono)", color: "var(--text-muted)", letterSpacing: "0.18em" }}
+      >
+        {beat.label}
+      </span>
+      <h3
+        className="text-lg font-semibold leading-snug"
+        style={{ color: "var(--text)", fontFamily: "var(--font-inter)", letterSpacing: "-0.02em" }}
+      >
+        {beat.headline}
+      </h3>
+      <p
+        className="text-sm leading-relaxed"
+        style={{ color: "var(--text-muted)", fontFamily: "var(--font-inter)", lineHeight: "1.75" }}
+      >
+        {beat.body}
+      </p>
+    </div>
+  );
+}
+
 export default function Philosophy() {
   return (
     <section
       className="py-24 px-6 md:px-16 lg:px-24"
-      style={{
-        background: "var(--bg)",
-        borderTop: "1px solid var(--border)",
-      }}
+      style={{ background: "var(--bg)", borderTop: "1px solid var(--border)" }}
     >
-      <div className="max-w-5xl">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 md:items-start">
-          {beats.map((beat) => (
-            <div
-              key={beat.label}
-              style={{ ["--md-offset" as string]: beat.mdOffset }}
-              className="md:[margin-top:var(--md-offset)]"
-            >
-              <div className="flex flex-col gap-3">
-                <span
-                  className="text-xs uppercase tracking-widest"
-                  style={{
-                    fontFamily: "var(--font-space-mono)",
-                    color: "var(--text-muted)",
-                    letterSpacing: "0.18em",
-                  }}
-                >
-                  {beat.label}
-                </span>
-                <h3
-                  className="text-lg font-semibold leading-snug"
-                  style={{
-                    color: "var(--text)",
-                    fontFamily: "var(--font-inter)",
-                    letterSpacing: "-0.02em",
-                  }}
-                >
-                  {beat.headline}
-                </h3>
-                <p
-                  className="text-sm leading-relaxed"
-                  style={{
-                    color: "var(--text-muted)",
-                    fontFamily: "var(--font-inter)",
-                    lineHeight: "1.75",
-                  }}
-                >
-                  {beat.body}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+      {/* mobile carousel */}
+      <div
+        className="md:hidden flex gap-8 -mx-6 px-6 pb-4"
+        style={{ overflowX: "auto", scrollSnapType: "x mandatory", scrollbarWidth: "none" }}
+      >
+        {beats.map((beat) => (
+          <div
+            key={beat.label}
+            className="shrink-0"
+            style={{ width: "80vw", scrollSnapAlign: "start" }}
+          >
+            <Beat beat={beat} />
+          </div>
+        ))}
+      </div>
+
+      {/* desktop staggered grid */}
+      <div className="hidden md:grid grid-cols-3 gap-12 md:gap-8 md:items-start max-w-5xl">
+        {beats.map((beat) => (
+          <div
+            key={beat.label}
+            style={{ ["--md-offset" as string]: beat.mdOffset }}
+            className="md:[margin-top:var(--md-offset)]"
+          >
+            <Beat beat={beat} />
+          </div>
+        ))}
       </div>
     </section>
   );

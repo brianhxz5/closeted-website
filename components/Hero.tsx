@@ -16,10 +16,7 @@ const layout: [number, number, number, number][] = [
 
 function WardrobeMosaic() {
   return (
-    <div
-      className="absolute inset-0 overflow-hidden pointer-events-none"
-      aria-hidden="true"
-    >
+    <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
       <div
         style={{
           display: "grid",
@@ -56,46 +53,31 @@ export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
     >
       <WardrobeMosaic />
 
-      <div className="relative z-10 w-full flex flex-col lg:flex-row items-center gap-12 lg:gap-20 px-6 md:px-16 lg:px-24 pt-24 md:pt-32 pb-16 md:pb-24">
-        {/* left — copy */}
-        <div className="flex-1 max-w-xl">
+      <div className="relative z-10 w-full flex flex-col lg:flex-row items-center gap-10 lg:gap-20 px-6 md:px-16 lg:px-24 pt-24 pb-12 md:pt-32 md:pb-16">
+        {/* copy */}
+        <div className="flex-1 max-w-xl w-full">
           <p
             className="text-xs uppercase tracking-widest mb-8"
-            style={{
-              fontFamily: "var(--font-space-mono)",
-              color: "var(--text-muted)",
-              letterSpacing: "0.18em",
-            }}
+            style={{ fontFamily: "var(--font-space-mono)", color: "var(--text-muted)", letterSpacing: "0.18em" }}
           >
             EARLY ACCESS
           </p>
-
           <h1
             className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight mb-6"
-            style={{
-              color: "var(--text)",
-              letterSpacing: "-0.02em",
-              fontFamily: "var(--font-inter)",
-            }}
+            style={{ color: "var(--text)", letterSpacing: "-0.02em", fontFamily: "var(--font-inter)" }}
           >
             you know what you like.
             <br />
             you just can&apos;t say it yet.
           </h1>
-
           <p
             className="text-base md:text-lg leading-relaxed mb-10 max-w-md"
-            style={{
-              color: "var(--text-muted)",
-              fontFamily: "var(--font-inter)",
-              letterSpacing: "-0.01em",
-            }}
+            style={{ color: "var(--text-muted)", fontFamily: "var(--font-inter)", letterSpacing: "-0.01em" }}
           >
             closeted finds your taste in the films you rewatch, the textures you
             keep noticing, the fits you screenshot and forget. it connects the
             dots and makes your style legible. without the gatekeeping.
           </p>
-
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <button
               onClick={onOpenModal}
@@ -110,36 +92,21 @@ export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
                 cursor: "pointer",
               }}
             >
-              get early access
-              <span aria-hidden="true">→</span>
+              get early access <span aria-hidden="true">→</span>
             </button>
-
             <span
               className="text-xs"
-              style={{
-                fontFamily: "var(--font-space-mono)",
-                color: "var(--text-muted)",
-                letterSpacing: "0.04em",
-              }}
+              style={{ fontFamily: "var(--font-space-mono)", color: "var(--text-muted)", letterSpacing: "0.04em" }}
             >
               iOS · free · testflight
             </span>
           </div>
         </div>
 
-        {/* right — phone video */}
-        <div className="hidden lg:flex flex-1 justify-center lg:justify-end items-center">
-          <div
-            className="overflow-hidden shadow-2xl"
-            style={{ borderRadius: "44px", width: 240 }}
-          >
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              style={{ width: "100%", display: "block" }}
-            >
+        {/* phone video — stacked below on mobile, right column on desktop */}
+        <div className="flex flex-1 justify-center lg:justify-end items-center w-full lg:w-auto">
+          <div className="overflow-hidden shadow-2xl" style={{ borderRadius: "44px", width: 220 }}>
+            <video autoPlay muted loop playsInline style={{ width: "100%", display: "block" }}>
               <source src="/onboarding-cropped.mp4" type="video/mp4" />
             </video>
           </div>
@@ -148,9 +115,7 @@ export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
 
       <div
         className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
-        style={{
-          background: "linear-gradient(to bottom, transparent, var(--bg))",
-        }}
+        style={{ background: "linear-gradient(to bottom, transparent, var(--bg))" }}
       />
     </section>
   );
