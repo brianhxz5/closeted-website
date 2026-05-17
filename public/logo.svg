@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!--
+    Closeted logomark: circle disc with smooth 4-pointed star cut out.
+    Star is offset slightly left so only its right arm breaks the circle,
+    creating the two C-openings at ~1 o'clock and ~5 o'clock.
+
+    Measurements traced from the uploaded PNG (1060×1060px):
+      circle: cx=50, cy=50, r=41.5
+      star top:   (46, 15)
+      star right: (94, 50)  — extends 2.5 units past circle right edge
+      star bottom:(46, 83)
+      star left:  (11, 50)  — 2.5 units inside circle left edge
+  -->
+  <defs>
+    <mask id="m">
+      <rect width="100" height="100" fill="white"/>
+      <path
+        d="M46,15
+           C46,30 90,44 94,50
+           C90,56 46,70 46,83
+           C46,70 12,56 11,50
+           C12,44 46,30 46,15 Z"
+        fill="black"
+      />
+    </mask>
+  </defs>
+  <circle cx="50" cy="50" r="41.5" fill="#1A1A1A" mask="url(#m)"/>
+</svg>
