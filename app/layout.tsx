@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Space_Mono, Newsreader } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const inter = Inter({
@@ -48,7 +49,10 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${spaceMono.variable} ${newsreader.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
