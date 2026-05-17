@@ -7,8 +7,6 @@
  * mock card for an <Image> from public/screenshots/passport-share.png.
  */
 
-const TESTFLIGHT = "https://testflight.apple.com/join/yC9xaTwD";
-
 const swatchColors = ["#4A5B6B", "#6B7E8C", "#7BA4B5"];
 
 const aesthetics = [
@@ -17,7 +15,7 @@ const aesthetics = [
   { label: "y2k", style: { fontWeight: 400 } },
 ];
 
-export default function PassportCallout() {
+export default function PassportCallout({ onOpenModal }: { onOpenModal: () => void }) {
   return (
     <section
       className="py-24 px-6 md:px-16 lg:px-24 flex flex-col lg:flex-row gap-16 lg:gap-24 items-start lg:items-center"
@@ -57,10 +55,8 @@ export default function PassportCallout() {
           single card that names what keeps pulling you in. yours to keep,
           yours to share.
         </p>
-        <a
-          href={TESTFLIGHT}
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          onClick={onOpenModal}
           className="inline-flex items-center gap-2 text-xs px-5 py-3 transition-opacity hover:opacity-70"
           style={{
             fontFamily: "var(--font-space-mono)",
@@ -68,10 +64,12 @@ export default function PassportCallout() {
             border: "1px dashed var(--accent-secondary)",
             borderRadius: "3px",
             letterSpacing: "0.04em",
+            background: "transparent",
+            cursor: "pointer",
           }}
         >
           get yours →
-        </a>
+        </button>
       </div>
 
       {/* right — passport card mockup */}

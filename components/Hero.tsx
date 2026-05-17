@@ -1,5 +1,3 @@
-const TESTFLIGHT = "https://testflight.apple.com/join/yC9xaTwD";
-
 /*
  * WardrobeMosaic: CSS-only wardrobe grid aesthetic.
  * Tones vary to suggest different garment textures/tones.
@@ -57,7 +55,7 @@ function WardrobeMosaic() {
   );
 }
 
-export default function Hero() {
+export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
   return (
     <section
       className="relative flex flex-col justify-center overflow-hidden"
@@ -109,10 +107,8 @@ export default function Hero() {
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-          <a
-            href={TESTFLIGHT}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={onOpenModal}
             className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium transition-opacity hover:opacity-80"
             style={{
               fontFamily: "var(--font-inter)",
@@ -120,11 +116,13 @@ export default function Hero() {
               color: "#fff",
               borderRadius: "3px",
               letterSpacing: "-0.01em",
+              border: "none",
+              cursor: "pointer",
             }}
           >
             get early access
             <span aria-hidden="true">→</span>
-          </a>
+          </button>
 
           <span
             className="text-xs"
