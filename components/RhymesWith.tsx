@@ -17,13 +17,13 @@ const cards = [
   },
   {
     category: "ALBUM",
-    title: "Blonde",
+    title: "Blonde, Frank Ocean",
     interpretation: "worn-in, slightly unresolved. like wearing something borrowed",
     accent: "var(--accent-secondary)",
   },
   {
     category: "CITY",
-    title: "Tokyo, Shimokitazawa",
+    title: "Tokyo, Japan",
     interpretation: "layered without trying. every piece has history",
     accent: "var(--accent-secondary)",
   },

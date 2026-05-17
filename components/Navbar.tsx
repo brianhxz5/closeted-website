@@ -13,7 +13,7 @@ export default function Navbar({ onOpenModal }: { onOpenModal: () => void }) {
       />
 
       <a href="/" className="relative flex items-center gap-2.5" aria-label="closeted home">
-        <Image src="/logo.svg" width={28} height={28} alt="" aria-hidden="true" />
+        <Image src="/logo.png" width={28} height={28} alt="" aria-hidden="true" />
         <span
           className="text-base font-semibold tracking-tight"
           style={{ color: "var(--text)", fontFamily: "var(--font-inter)" }}

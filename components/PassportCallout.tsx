@@ -1,19 +1,4 @@
-/*
- * Dark section — showcases the Style Passport, which is the virality hook.
- * Uses the design language from the dark closet screen (#2A2622 bg).
- *
- * The passport card is rendered as a faithful HTML/CSS recreation of the
- * in-app shared card. When real screenshots are available, swap the
- * mock card for an <Image> from public/screenshots/passport-share.png.
- */
-
-const swatchColors = ["#4A5B6B", "#6B7E8C", "#7BA4B5"];
-
-const aesthetics = [
-  { label: "techwear", style: { fontStyle: "italic", fontWeight: 600 } },
-  { label: "streetwear", style: { fontStyle: "italic", fontWeight: 600 } },
-  { label: "y2k", style: { fontWeight: 400 } },
-];
+import Image from "next/image";
 
 export default function PassportCallout({ onOpenModal }: { onOpenModal: () => void }) {
   return (
@@ -51,7 +36,7 @@ export default function PassportCallout({ onOpenModal }: { onOpenModal: () => vo
             lineHeight: "1.75",
           }}
         >
-          after a while, closeted knows enough to give you a style passport — a
+          after a while, closeted knows enough to give you a style passport. a
           single card that names what keeps pulling you in. yours to keep,
           yours to share.
         </p>
@@ -72,113 +57,21 @@ export default function PassportCallout({ onOpenModal }: { onOpenModal: () => vo
         </button>
       </div>
 
-      {/* right — passport card mockup */}
+      {/* right — real screenshot */}
       <div className="flex-1 flex justify-center lg:justify-end">
-        <PassportCard />
+        <div
+          className="overflow-hidden shadow-2xl"
+          style={{ borderRadius: "36px", width: 260 }}
+        >
+          <Image
+            src="/screenshots/style-passport.jpg"
+            alt="Style Passport"
+            width={919}
+            height={2000}
+            style={{ width: "100%", height: "auto", display: "block" }}
+          />
+        </div>
       </div>
     </section>
-  );
-}
-
-function PassportCard() {
-  /* 3×3 texture grid — placeholders until real user photos are available */
-  const gridSwatches = [
-    "var(--accent)",
-    "#3A3530",
-    "#4A5568",
-    "#8B7355",
-    "#2D5016",
-    "#1A1A2E",
-    "#2C3E50",
-    "#4A3728",
-    "#6B7A8D",
-  ];
-
-  return (
-    <div
-      className="w-full max-w-sm overflow-hidden shadow-2xl"
-      style={{ borderRadius: "6px", background: "var(--dark-card)" }}
-    >
-      {/* 3×3 texture grid */}
-      <div className="grid grid-cols-3" style={{ height: "180px" }}>
-        {gridSwatches.map((color, i) => (
-          <div
-            key={i}
-            style={{ background: color, opacity: 0.85 }}
-          />
-        ))}
-      </div>
-
-      {/* card content */}
-      <div className="p-5 flex flex-col gap-3">
-        {/* color palette dots */}
-        <div className="flex gap-2">
-          {swatchColors.map((c) => (
-            <div
-              key={c}
-              className="rounded-full"
-              style={{ width: 20, height: 20, background: c }}
-            />
-          ))}
-        </div>
-
-        {/* passport headline */}
-        <p
-          className="text-2xl font-bold leading-tight"
-          style={{
-            color: "#fff",
-            fontFamily: "var(--font-inter)",
-            letterSpacing: "-0.02em",
-          }}
-        >
-          pockets are a personality
-        </p>
-
-        {/* aesthetics */}
-        <div className="flex flex-col gap-0.5">
-          {aesthetics.map((a) => (
-            <span
-              key={a.label}
-              className="text-base leading-snug"
-              style={{
-                fontFamily: "var(--font-newsreader)",
-                color: "#fff",
-                ...a.style,
-              }}
-            >
-              {a.label}
-            </span>
-          ))}
-        </div>
-
-        {/* descriptor */}
-        <p
-          className="text-sm"
-          style={{ color: "#8C8C8C", fontFamily: "var(--font-inter)" }}
-        >
-          pulled toward hard, precise, sharp.
-        </p>
-
-        {/* share row */}
-        <div className="flex items-center justify-between pt-2 mt-1" style={{ borderTop: "1px solid #3A3530" }}>
-          <span
-            className="text-xs"
-            style={{
-              fontFamily: "var(--font-space-mono)",
-              color: "#555",
-              letterSpacing: "0.04em",
-            }}
-          >
-            updated may 2026
-          </span>
-          <span
-            className="text-xs font-semibold"
-            style={{ color: "var(--accent-secondary)", fontFamily: "var(--font-inter)" }}
-          >
-            closeted
-          </span>
-        </div>
-      </div>
-    </div>
   );
 }
