@@ -166,9 +166,9 @@ function FormState({
         </h2>
         <p
           className="text-sm mt-1"
-          style={{ color: "var(--text-muted)", fontFamily: "var(--font-inter)" }}
+          style={{ color: "var(--text-muted)", fontFamily: "var(--font-inter)", lineHeight: "1.6" }}
         >
-          we&apos;ll enroll you and send you the link.
+          we&apos;ll send you a testflight link — just download the app. free, no payment.
         </p>
       </div>
 
