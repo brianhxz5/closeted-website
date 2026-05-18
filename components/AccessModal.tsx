@@ -259,14 +259,14 @@ function SuccessState({ name, onClose }: { name: string; onClose: () => void }) 
           className="text-xl font-semibold leading-snug"
           style={{ color: "var(--text)", fontFamily: "var(--font-inter)", letterSpacing: "-0.02em" }}
         >
-          welcome, {first}.
+          thank you, {first}.
         </h2>
         <p
           className="text-sm mt-2"
           style={{ color: "var(--text-muted)", fontFamily: "var(--font-inter)", lineHeight: "1.7" }}
         >
-          you&apos;re on the list. here&apos;s your testflight link. install
-          the app and start building your taste.
+          tap the link below to join on testflight and install the app.
+          if nothing shows up, try restarting the testflight app.
         </p>
       </div>
 
@@ -285,7 +285,7 @@ function SuccessState({ name, onClose }: { name: string; onClose: () => void }) 
           textDecoration: "none",
         }}
       >
-        open testflight →
+        join on testflight →
       </a>
 
       <p
