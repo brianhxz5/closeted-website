@@ -18,11 +18,12 @@ export default function Footer() {
         closeted
       </span>
 
-      <nav className="flex items-center gap-6">
+      <nav className="flex flex-wrap items-center gap-x-6 gap-y-2">
         {[
           { label: "instagram", href: "https://www.instagram.com/trycloseted?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" },
           { label: "tiktok", href: "https://www.tiktok.com/@closeted.app?_r=1&_t=ZS-96QgIicVFIG" },
           { label: "linkedin", href: "https://www.linkedin.com/company/closetedapp/" },
+          { label: "support", href: "/support" },
           { label: "privacy", href: "/privacy" },
         ].map((link) => (
           <a
